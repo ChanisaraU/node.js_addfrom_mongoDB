@@ -1,0 +1,48 @@
+<html>
+  <head>
+  </head>
+    <body>
+      <%- include('layout') %>
+      <%- include('css') %>
+          <h2>
+            <%= data %>
+          </h2>
+          <% if (locals.errors) { %>
+            <ul class="alert alert-danger">
+                <% Object.values(errors).forEach(function(error){ %> 
+                  <!-- errors ส่งมาจาก blog.js ของ router บรรทัดที่ chack-->
+                      <li><%= error.msg %></li>
+                <% }); %>
+            </ul>
+            <% } %>
+        <form action="/blog/addfrom" method="POST">
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1" >topic</span>
+            </div>
+            <input type="text" class="form-control" placeholder="topic" aria-label="topic" name="topic" aria-describedby="basic-addon1">
+          </div>
+
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">article</span>
+            </div>
+            <textarea class="form-control" aria-label="article" name="article"></textarea>
+          </div><br>
+
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <label class="input-group-text" name="category" for="inputGroupSelect01">category</label>
+            </div>
+            <select name="category" class="custom-select" id="inputGroupSelect01"> 
+              <option selected>Choose...</option>
+              <option value="1">นิยาย</option>
+              <option value="2">สารคดี</option>
+              <option value="3">หนังสือเรียน</option>
+              <!-- เอาค่า name ส่งไปที่หน้า blog.js -->
+            </select>
+          </div>
+          <button class="btn btn-primary" type="submit" name="submit" id="submit" value="บันทึก">บันทึก</button>
+        </form>
+      </body>
+</html>

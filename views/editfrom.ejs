@@ -1,0 +1,64 @@
+<html>
+  <head>
+  </head>
+    <body>
+      <%- include('layout') %>
+      <%- include('css') %>
+          <a class="nav-link" href="/">Home<span class="sr-only">(current)</span></a>
+          <h2><%= blog %></h2>
+          <h2><%= data %></h2>
+          <% if (locals.errors) { %>
+            <ul class="alert alert-danger">
+                <% Object.values(errors).forEach(function(error){ %> 
+                  <!-- errors ส่งมาจาก blog.js ของ router บรรทัดที่ chack-->
+                      <li><%= error.msg %></li>
+                      
+                <% }); %>
+            </ul>
+            <% } %>
+        <form action="/blog/update" method="POST">
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1" >topic</span>
+            </div>
+            <input type="text" class="form-control" placeholder="topic" aria-label="topic" name="topic" aria-describedby="basic-addon1" value="<%= blog.topic %>">
+          </div>
+          
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">article</span>
+            </div>
+            <textarea class="form-control" aria-label="article" name="article" ><%= blog.article %></textarea>
+          </div><br>
+
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <label class="input-group-text" name="category" for="inputGroupSelect01">category</label>
+            </div>
+            <select name="category" class="custom-select" id="inputGroupSelect01"> 
+              <option selected>Choose...</option>
+              <option value="1"
+              <% if (blog.category == "1"){%>
+                selected
+                <% } %>
+              >นิยาย</option>
+              <option value="2"
+              <% if (blog.category == "2"){%>
+                selected
+                <% } %>
+              >สารคดี</option>
+              <option value="3"
+              <% if (blog.category == "3"){%>
+                selected
+                <% } %>
+                <!-- ใส่ if เพื่อเช้คว่าค่าตรงกับที่มีในฐานข้อมูลมั้ย -->
+              >หนังสือเรียน</option>
+              <!-- เอาค่า name ส่งไปที่หน้า blog.js -->
+            </select>
+            <input type="hidden" name="id" value="<%= blog._id%>">
+            <!--  ส่งค่าไอดีไปหา router blog.js ด้วยเพราะต้องใช้อ้างอิงเลข id ใส่ hidden ไว้ไม่ให้มองเห็น -->
+          </div>
+          <button class="btn btn-primary" type="submit" name="submit" id="submit" value="อัพเดท" >อัพเดท</button>
+        </form>
+      </body>
+</html>

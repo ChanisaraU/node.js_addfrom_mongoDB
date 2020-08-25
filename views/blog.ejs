@@ -1,0 +1,19 @@
+<html>
+    <body>
+      <%- include('layout') %>
+      <%- include('css') %>
+          <p><%= blogs%></p>
+          <p>
+            <% Object.values(blogs).forEach(function(blog){ %>
+              <!--  ใช้ข้อมูลจาก blogs.js บรรทัดที่ 28 ที่ชื่อ blog  -->
+              <h4><b>ชื่อบทความ : </b>
+                <%= blog.topic %>
+              </h4>
+              <i class="fa fa-html5" aria-hidden="true"></i><b></b>ผู้เขียน : </b><%= blog.article %></h5>
+              <a href="blog/edit/<%= blog._id %>" type="button" class="btn btn-info">แก้ไข</a>
+              <a href="blog/delete/<%= blog._id %>" type="button" class="btn btn-warning" onclick="return confirm('ต้องการลบหรือไม่') ">ลบ</a>
+          </p>
+          
+          <% }) %>
+    </body>
+</html>     
